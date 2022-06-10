@@ -1,0 +1,14 @@
+#Folders
+Data/
+Logs/
+saved_images/
+trails/
+pretrain_clinic/
+
+#extension
+*.pyc
+*.pth
+*.log
+
+#file
+hello_world.py

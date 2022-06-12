@@ -4,6 +4,7 @@ Logs/
 saved_images/
 trails/
 pretrain_clinic/
+copy/
 
 #extension
 *.pyc

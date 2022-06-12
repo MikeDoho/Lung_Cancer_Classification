@@ -650,6 +650,9 @@ class Trainer:
             csv_dir = os.path.join(store_all_label_pred_dir, filename)
             image_test_df.to_csv(path_or_buf=csv_dir, index=False)
 
+            auc_test = roc_auc_score(y_true=np.argmax(target2_, axis=-1), y_score=pred2_[:, 1])
+            print('Test AUC: ', auc_test)
+
             if self.args.use_tb.lower()=='true':
                 fig_add = roc_auc_plot(target2_, pred2_, data_title='Test ROC')
                 self.tb_logger.add_figure(f"Image Model Test AUC", figure=fig_add)

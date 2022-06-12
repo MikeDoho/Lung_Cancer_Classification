@@ -145,7 +145,7 @@ class ResNet(nn.Module):
         self.avgpool = nn.AdaptiveAvgPool3d((1, 1, 1))
         self.dropout = nn.Dropout(p=0.6)
 
-        # the num 2 will need to be change if number of changes change!!!!
+        # the num 2 will need to be change if number of class change!!!!
         self.fc = nn.Linear(512 * block.expansion * 2, num_classes)
 
         self.conv_pred = nn.Sequential(
@@ -157,6 +157,7 @@ class ResNet(nn.Module):
                 padding=(1, 1, 1),
             ),
 
+            nn.Dropout3d(p=0.05),
             nn.BatchNorm3d(512),
             nn.ReLU(inplace=True),
 
@@ -168,6 +169,7 @@ class ResNet(nn.Module):
                 padding=(1, 1, 1),
                 bias=False),
 
+            nn.Dropout3d(p=0.05),
             nn.BatchNorm3d(256),
             nn.ReLU(inplace=True),
 
@@ -179,6 +181,7 @@ class ResNet(nn.Module):
                 padding=(1, 1, 1),
             ),
 
+            nn.Dropout3d(p=0.05),
             nn.BatchNorm3d(128),
             nn.ReLU(inplace=True),
             nn.Conv3d(
@@ -188,6 +191,8 @@ class ResNet(nn.Module):
                 stride=(1, 1, 1),
                 padding=(1, 1, 1),
                 bias=False),
+
+            nn.Dropout3d(p=0.05),
             nn.BatchNorm3d(128),
             nn.ReLU(inplace=True),
 
@@ -215,7 +220,7 @@ class ResNet(nn.Module):
                     stride=stride,
                     no_cuda=self.no_cuda)
             else:
-                dropout_downsample = nn.Dropout3d(p=0.00)
+                dropout_downsample = nn.Dropout3d(p=0.05)
                 downsample = nn.Sequential(
                     nn.Conv3d(
                         self.inplanes,

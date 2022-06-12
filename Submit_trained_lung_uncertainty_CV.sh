@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-python Train_Transfer_Lung_CV.py >> Logs/20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV.log \
+python Trained_lung_model_uncertainty.py >> Logs/20220612_pretrained_models_uncertainty_DO-000-005_100-005_do300_tta300-3.log \
 --gpu_id 0 \
 --is_transfer True \
 --is_classi True \
@@ -41,7 +40,7 @@ python Train_Transfer_Lung_CV.py >> Logs/20220610_res101ext-sm-do005_lTL[1e-2]_l
 \
 --use_tb 'false' \
 \
---short_note "20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV" \
+--short_note "20220612_trained_res101_DO-000-005_100-005_do100_tta300-3" \
 --exclude_mrn 'false' \
 --exclude_mrn_filename 'na.csv' \
 --exclude_mrn_path './na/' \
@@ -53,5 +52,14 @@ python Train_Transfer_Lung_CV.py >> Logs/20220610_res101ext-sm-do005_lTL[1e-2]_l
 --cv_num 5 \
 --augmentation 'true' \
 --do_normalization 'true' \
---aug_percent 0.90
-
+--aug_percent 0.90 \
+\
+--reset_bottleneck_dropout_percent 0.0 \
+--mc_bottleneck_dropout_rate 0.05 \
+--reset_downsample_dropout_percent 1 \
+--mc_downsample_dropout_rate 0.05 \
+--mc_do 'true' \
+--do_tta 'true' \
+--mc_do_num 300 \
+--tta_num 300 \
+--increase_tta_factor 3 \

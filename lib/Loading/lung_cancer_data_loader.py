@@ -64,7 +64,7 @@ class Lung_Cancer_Classification(Dataset):
             df_train['mrn'] = list(set(train_mrn))
 
             # save file as csv
-            save_location = r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/RN_pretrain_clinic/'
+            save_location = r'./Data/RN_pretrain_clinic/'
 
             if not os.path.exists(save_location):
                 os.makedirs(save_location)
@@ -82,7 +82,7 @@ class Lung_Cancer_Classification(Dataset):
 
             # consider increasing the number of training examples (ie just repeat same examples)
 
-            print('Length of training inputs: ', len(self.args.train_lung_list))
+            print('Length of training inputs: ', len(image))
             print('Length of training image labels: ', len(labels))
             assert len(image) == len(labels), 'input and labels should be of same length'
 
@@ -93,7 +93,7 @@ class Lung_Cancer_Classification(Dataset):
             df_val['mrn'] = val_mrn
 
             # save file as csv
-            save_location = r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/RN_pretrain_clinic/'
+            save_location = r'./Data/RN_pretrain_clinic/'
             val_mrn_str = f"val_mrn_lung_{self.args.random_value_for_fold[self.args.cv_count_csv_save]}.csv"
             df_val.to_csv(os.path.join(save_location, val_mrn_str), index=False)
 
@@ -111,7 +111,7 @@ class Lung_Cancer_Classification(Dataset):
             df_test['mrn'] = test_mrn
 
             # save file as csv
-            save_location = r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/RN_pretrain_clinic/'
+            save_location = r'./Data/RN_pretrain_clinic/'
             test_mrn_str = f"test_mrn_lung_{self.args.random_value_for_fold[self.args.cv_count_csv_save]}.csv"
             df_test.to_csv(os.path.join(save_location, test_mrn_str), index=False)
 
@@ -182,20 +182,20 @@ class Lung_Cancer_Classification(Dataset):
         mrn = f_img
 
 
-        if not os.path.exists(os.path.join(r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/initial',
+        if not os.path.exists(os.path.join(r'./Data/saved_images/lung_eval/initial',
                                                    self.args.short_note)):
-            os.makedirs(os.path.join(r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/initial',
+            os.makedirs(os.path.join(r'./Data/saved_images/lung_eval/initial',
                                                    self.args.short_note))
         else:
             pass
 
         if random.randint(0, 1000) > 1001 and \
-                mrn not in os.listdir(os.path.join(r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/initial',
+                mrn not in os.listdir(os.path.join(r'./Data/saved_images/lung_eval/initial',
                                                    self.args.short_note)):
             multi_reg_image_review(img[..., 0], img[..., 0], img[..., 0],
                                    gaps=4, initial=0, image_rows=3,
                                    mrn=mrn + '_' + self.mode + '_initial', view=False,
-                                   fig_storage_dir=os.path.join(r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/initial',
+                                   fig_storage_dir=os.path.join(r'./Data/saved_images/lung_eval/initial',
                                                    self.args.short_note))
 
         assert np.shape(img) == (
@@ -208,21 +208,21 @@ class Lung_Cancer_Classification(Dataset):
             img[..., 0] = (img[..., 0] - self.args.input_min) / (self.args.input_max - self.args.input_min)
 
             if not os.path.exists(os.path.join(
-                    r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/norm',
+                    r'./Data/saved_images/lung_eval/norm',
                     self.args.short_note)):
                 os.makedirs(os.path.join(
-                    r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/norm',
+                    r'./Data/saved_images/lung_eval/norm',
                     self.args.short_note))
             else:
                 pass
 
             if random.randint(0, 1000) > 1001 and \
-                mrn not in os.listdir(os.path.join(r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/norm',
+                mrn not in os.listdir(os.path.join(r'./Data/saved_images/lung_eval/norm',
                                                    self.args.short_note)):
                 multi_reg_image_review(img[..., 0], img[..., 0], img[..., 0],
                                        gaps=4, initial=0, image_rows=3,
                                        mrn=mrn + '_' + self.mode + '_norm', view=False,
-                                       fig_storage_dir=os.path.join(r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/norm',
+                                       fig_storage_dir=os.path.join(r'./Data/saved_images/lung_eval/norm',
                                                    self.args.short_note))
         else:
             pass
@@ -232,22 +232,22 @@ class Lung_Cancer_Classification(Dataset):
                 img, lab = self.transform(img, lab)
 
                 if not os.path.exists(os.path.join(
-                        r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/aug',
+                        r'./Data/saved_images/lung_eval/aug',
                         self.args.short_note)):
                     os.makedirs(os.path.join(
-                        r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/aug',
+                        r'./Data/saved_images/lung_eval/aug',
                         self.args.short_note))
                 else:
                     pass
 
                 if random.randint(0, 1000) > 1001 and \
-                mrn not in os.listdir(os.path.join(r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/aug',
+                mrn not in os.listdir(os.path.join(r'./Data/saved_images/lung_eval/aug',
                                                    self.args.short_note)):
 
                     multi_reg_image_review(img[..., 0], img[..., 0], img[..., 0],
                                            gaps=4, initial=0, image_rows=3,
                                            mrn=mrn + '_' + self.mode + '_aug', view=False,
-                                           fig_storage_dir=os.path.join(r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/aug',
+                                           fig_storage_dir=os.path.join(r'./Data/saved_images/lung_eval/aug',
                                                    self.args.short_note))
 
             else:
@@ -271,7 +271,7 @@ class Lung_Cancer_Classification(Dataset):
                     multi_reg_image_review(img[..., 0], img[..., 0], img[..., 0],
                                            gaps=4, initial=0, image_rows=3,
                                            mrn=mrn + '_' + self.mode + '_aug2', view=False,
-                                           fig_storage_dir=r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_images/lung_eval/aug')
+                                           fig_storage_dir=r'./Data/saved_images/lung_eval/aug')
 
             elif self.tta:
 

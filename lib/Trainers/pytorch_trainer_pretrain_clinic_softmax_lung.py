@@ -220,7 +220,7 @@ class Trainer:
             #                            optimizer=self.optimizer)
 
         # Saving training values (train and val to graph)
-        train_val_values_store_dir = '/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/train_loss_eval/'
+        train_val_values_store_dir = './Lung_Cancer_Classification/Data/train_loss_eval/'
 
         train_val_values_model_dir = os.path.join(train_val_values_store_dir, self.args.short_note)
         if not os.path.exists(train_val_values_model_dir):
@@ -303,14 +303,13 @@ class Trainer:
 
             look_at_train = pd.DataFrame(x_train_clinic)
 
-            if not os.exist(f"/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/look_at_clinic"):
-                os.makedirs(f"/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/look_at_clinic")
+            if not os.exist(f"./Data/look_at_clinic"):
+                os.makedirs(f"./Data/look_at_clinic")
             else:
                 pass
 
             look_at_train.to_csv(
-                f"/home/s185479/Python/Working_Projects/Lung_Cancer_Classification"
-                f"/Data/look_at_clinic/trainlook_lung_{self.args.random_value_for_fold[self.args.cv_count_csv_save]}.csv")
+                f"./Data/look_at_clinic/trainlook_lung_{self.args.random_value_for_fold[self.args.cv_count_csv_save]}.csv")
 
             x_val_clinic, y_val_clinic = \
                 clinical_data(args=self.args,
@@ -373,8 +372,7 @@ class Trainer:
 
             # Clinical model Results
             # Validation results
-            store_all_label_pred_dir = r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification' \
-                                       r'/Data/saved_predictions/lung_predictions'
+            store_all_label_pred_dir = r'./Data/saved_predictions/lung_predictions'
 
             if not os.path.exists(store_all_label_pred_dir):
                 print('it gets here')
@@ -511,8 +509,7 @@ class Trainer:
         print('Train AUC: ', train_auc_)
 
         # storing training predictions for image model
-        store_all_label_pred_dir = r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification' \
-                                   r'/Data/saved_predictions/lung_predictions'
+        store_all_label_pred_dir = r'./Data/saved_predictions/lung_predictions'
 
         if not os.path.exists(store_all_label_pred_dir):
             os.makedirs(store_all_label_pred_dir)
@@ -578,8 +575,7 @@ class Trainer:
 
 
         # storing predictions for image model
-        store_all_label_pred_dir = r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification' \
-                                   r'/Data/saved_predictions/lung_predictions'
+        store_all_label_pred_dir = r'./Data/saved_predictions/lung_predictions'
         image_val_df = pd.DataFrame()
         image_val_df['true'] = [np.argmax(x) for x in target2_]
         image_val_df['pred'] = [x[1] for x in pred2_]
@@ -782,8 +778,7 @@ class Trainer:
                                                                            n_classes=2,
                                                                            n_samples=len(val_generator_eval))
 
-                epistemic_uncertainty_store_dir = '/home/s185479/Python/Working_Projects/Lung_Cancer_Classification' \
-                                                  '/Data/Uncertainty/Epistemic/'
+                epistemic_uncertainty_store_dir = './Data/Uncertainty/Epistemic/'
 
                 if not os.path.exists(epistemic_uncertainty_store_dir):
                     os.makedirs(epistemic_uncertainty_store_dir)
@@ -847,8 +842,7 @@ class Trainer:
                                                                     n_samples=len(test_generator_eval_tta))
 
 
-                aleatoric_uncertainty_store_dir = '/home/s185479/Python/Working_Projects/Lung_Cancer_Classification' \
-                                                  '/Data/Uncertainty/Aleatoric/'
+                aleatoric_uncertainty_store_dir = './Data/Uncertainty/Aleatoric/'
 
                 if not os.path.exists(aleatoric_uncertainty_store_dir):
                     os.makedirs(aleatoric_uncertainty_store_dir)
@@ -1009,7 +1003,7 @@ class Trainer:
                 pred2_c_1 = [x[1] for x in pred2_c]
 
                 #### for howard analysis for paired t-test. predictions need to match
-                store_all_label_pred_dir = r'/data/maia/mdohop/Holman_Pathway/Residual_Disease/Pytorch/Data/saved_predictions/lung_predictions'
+                store_all_label_pred_dir = r'./Data/saved_predictions/lung_predictions'
                 clinic_test2_df = pd.DataFrame()
                 clinic_test2_df['true'] = [np.argmax(x) for x in target2_]
                 clinic_test2_df['pred'] = [x for x in pred2_c_1]

@@ -1,12 +1,11 @@
 #!/bin/bash
 
-
-python Train_Transfer_Lung_CV.py >> Logs/20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV.log \
+python Train_Transfer_Lung_CV.py >> Logs/20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV.log \
 --gpu_id 0 \
 --is_transfer True \
 --is_classi True \
 --in_modality 1 \
---n_epochs 100 \
+--n_epochs 200 \
 --manual_seed 200 \
 --batch_size 30 \
 --input_H 32 \
@@ -41,7 +40,7 @@ python Train_Transfer_Lung_CV.py >> Logs/20220610_res101ext-sm-do005_lTL[1e-2]_l
 \
 --use_tb 'false' \
 \
---short_note "20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV" \
+--short_note "20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV" \
 --exclude_mrn 'false' \
 --exclude_mrn_filename 'na.csv' \
 --exclude_mrn_path './na/' \
@@ -53,5 +52,5 @@ python Train_Transfer_Lung_CV.py >> Logs/20220610_res101ext-sm-do005_lTL[1e-2]_l
 --cv_num 5 \
 --augmentation 'true' \
 --do_normalization 'true' \
---aug_percent 0.90
+--aug_percent 0.70
 

@@ -7,6 +7,7 @@ import math
 from sklearn.metrics import roc_auc_score, confusion_matrix, average_precision_score, classification_report
 import copy
 import ast
+from scipy.stats import dirichlet
 
 # Torch Modules
 import torch
@@ -921,9 +922,9 @@ class Trainer:
         # train_epoch_loss = self.args.train_running_loss / len(self.train_data_loader.dataset)
         # train_epoch_acc = self.args.train_running_corrects.double() / len(self.train_data_loader.dataset)
 
-        train_prauc = np.nanmean(prauc_cum)
-        train_auc = np.nanmean(auc_cum)
-        train_youden_ = np.nanmean(youden_cum)
+        # train_prauc = np.nanmean(prauc_cum)
+        # train_auc = np.nanmean(auc_cum)
+        # train_youden_ = np.nanmean(youden_cum)
 
         # Calculating time per epoch
         ty_res = time.gmtime(time.time() - epoch_start_time)
@@ -959,7 +960,7 @@ class Trainer:
 
         f1_cum = []
         prec_cum = []
-        youden_cum = []
+        # youden_cum = []
 
         # starting epoch timer
         epoch_start_time = time.time()
@@ -1024,7 +1025,7 @@ class Trainer:
                 sens_cum.append(sens)
                 f1_cum.append(f1_value)
                 prec_cum.append(prec_value)
-                youden_cum.append(spec + self.args.youden_sens_weight * sens - 1)
+                # youden_cum.append(spec + self.args.youden_sens_weight * sens - 1)
 
                 if self.args.use_tb.lower() == 'true':
                     self.tb_logger.add_scalar(f"val_loss", loss.item(), self.val_count)
@@ -1051,9 +1052,9 @@ class Trainer:
         # this will likely need editing
         # val_epoch_loss = self.args.val_running_loss / len(self.valid_data_loader.dataset)
         # val_epoch_acc = self.args.val_running_corrects.double() / len(self.valid_data_loader.dataset)
-        val_prauc = np.nanmean(prauc_cum)
-        val_auc = np.nanmean(auc_cum)
-        youden_ = np.nanmean(youden_cum)
+        # val_prauc = np.nanmean(prauc_cum)
+        # val_auc = np.nanmean(auc_cum)
+        # youden_ = np.nanmean(youden_cum)
 
         self.val_loss = sum(loss_cum) / len(loss_cum)
 

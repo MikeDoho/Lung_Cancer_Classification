@@ -5,6 +5,7 @@ saved_images/
 trails/
 pretrain_clinic/
 copy/
+evdl/
 
 #extension
 *.pyc

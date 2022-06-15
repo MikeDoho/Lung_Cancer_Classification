@@ -1,7 +1,7 @@
 #!/bin/bash
 
-python Trained_lung_model_uncertainty.py >> Logs/20220612_pretrained_models_uncertainty_DO-000-005_100-005_do300_tta300-3.log \
---gpu_id 0 \
+python Trained_lung_model_uncertainty.py >> Logs/20220614_trained-evdl_models_uncertainty_DO-000-005_100-005_do200_tta200-2.log \
+--gpu_id 1 \
 --is_transfer True \
 --is_classi True \
 --in_modality 1 \
@@ -40,7 +40,7 @@ python Trained_lung_model_uncertainty.py >> Logs/20220612_pretrained_models_unce
 \
 --use_tb 'false' \
 \
---short_note "20220612_trained_res101_DO-000-005_100-005_do100_tta300-3" \
+--short_note "20220614_trained-evdl_res101_DO-000-005_100-005_do200_tta200-2" \
 --exclude_mrn 'false' \
 --exclude_mrn_filename 'na.csv' \
 --exclude_mrn_path './na/' \
@@ -52,7 +52,7 @@ python Trained_lung_model_uncertainty.py >> Logs/20220612_pretrained_models_unce
 --cv_num 5 \
 --augmentation 'true' \
 --do_normalization 'true' \
---aug_percent 0.90 \
+--aug_percent 0.70 \
 \
 --reset_bottleneck_dropout_percent 0.0 \
 --mc_bottleneck_dropout_rate 0.05 \
@@ -60,6 +60,6 @@ python Trained_lung_model_uncertainty.py >> Logs/20220612_pretrained_models_unce
 --mc_downsample_dropout_rate 0.05 \
 --mc_do 'true' \
 --do_tta 'true' \
---mc_do_num 300 \
---tta_num 300 \
---increase_tta_factor 3 \
+--mc_do_num 200 \
+--tta_num 200 \
+--increase_tta_factor 2 \

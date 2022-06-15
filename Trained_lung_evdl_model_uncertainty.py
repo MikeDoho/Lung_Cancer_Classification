@@ -28,7 +28,7 @@ from lib.utils.model_single_input_extend_dropout import generate_model
 # from lib.utils.model_spatial import generate_model
 from lib.Loading.lung_cancer_data_loader import Lung_Cancer_Classification
 # import lib.Trainers.pytorch_trainer_pretrain_clinic as pytorch_trainer
-import lib.Trainers.pytorch_trainer_pretrain_clinic_softmax_lung as pytorch_trainer
+import lib.Trainers.pytorch_trainer_evdl_lung as pytorch_trainer
 from lib.utils.logger import log
 from lib.medzoo.ResNet3DMedNet import generate_resnet3d
 from lib.Models.resnet_fork_single_input_extend_dropout import resnet50
@@ -427,7 +427,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
 
     if args.mc_do.lower() == 'true':
         # Epistemic Uncertainty # Calculating MC Dropout
-        from lib.utils.mc_dropout_pytorch import get_monte_carlo_predictions
+        from lib.utils.mc_dropout_evdl_pytorch import get_monte_carlo_predictions
 
         df_val_epistemic_entropy = get_monte_carlo_predictions(data_loader=val_generator_eval,
                                                                forward_passes=args.mc_do_num,
@@ -450,7 +450,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
 
         # Saving validation Epistemic uncertainty calculations
 
-        filename_val_epistemic_entropy = f"image_model_val_epistemic_do_entropy_" \
+        filename_val_epistemic_entropy = f"image_model_val_evdl_epistemic_do_entropy_" \
                                          f"resnet_lung_bestof_fold_{j + 1}_bottleneck_{args.reset_bottleneck_dropout_percent}_" \
                                          f"{args.mc_bottleneck_dropout_rate}_downsample_{args.reset_downsample_dropout_percent}_" \
                                          f"{args.mc_downsample_dropout_rate}_num{args.mc_do_num}_rundate_{args.time_stamp}.csv"
@@ -459,7 +459,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
         df_val_epistemic_entropy.to_csv(val_epistemic_entropy_csv_dir)
 
         # Saving test Epistemic uncertainty calculations
-        filename_test_epistemic_entropy = f"image_model_test_epistemic_do_entropy_" \
+        filename_test_epistemic_entropy = f"image_model_test_evdl_epistemic_do_entropy_" \
                                           f"resnet_lung_bestof_fold_{j + 1}_bottleneck_{args.reset_bottleneck_dropout_percent}_" \
                                           f"{args.mc_bottleneck_dropout_rate}_downsample_{args.reset_downsample_dropout_percent}_" \
                                           f"{args.mc_downsample_dropout_rate}_num{args.mc_do_num}_rundate_{args.time_stamp}.csv"
@@ -469,7 +469,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
 
     if args.do_tta.lower() == 'true':
         # Aleatoric Uncertainty
-        from lib.utils.tta_pytorch import get_tta_predictions
+        from lib.utils.tta_evdl_pytorch import get_tta_predictions
 
         df_val_aleatoric_entropy = get_tta_predictions(data_loader=val_generator_eval_tta,
                                                        forward_passes=args.tta_num,
@@ -491,7 +491,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
             pass
 
         # Saving validation aleatoric uncertainty calculations
-        filename_val_aleatoric_entropy = f"image_model_val_aleatoric_tta_entropy_" \
+        filename_val_aleatoric_entropy = f"image_model_val_evdl_aleatoric_tta_entropy_" \
                                          f"resnet_lung_bestof_fold_{j + 1}_num{args.tta_num}_" \
                                          f"ttafactor_{args.increase_tta_factor}_rundate_{args.time_stamp}.csv"
         val_aleatoric_entropy_csv_dir = os.path.join(aleatoric_uncertainty_store_dir,
@@ -499,7 +499,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
         df_val_aleatoric_entropy.to_csv(val_aleatoric_entropy_csv_dir)
 
         # Saving test aleatoric uncertainty calculations
-        filename_test_aleatoric_entropy = f"image_model_test_aleatoric_tta_entropy_" \
+        filename_test_aleatoric_entropy = f"image_model_test_evdl_aleatoric_tta_entropy_" \
                                           f"resnet_lung_bestof_fold_{j + 1}_num{args.tta_num}_" \
                                           f"ttafactor_{args.increase_tta_factor}_rundate_{args.time_stamp}.csv"
         test_aleatoric_entropy_csv_dir = os.path.join(aleatoric_uncertainty_store_dir,

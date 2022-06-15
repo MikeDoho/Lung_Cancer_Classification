@@ -97,17 +97,16 @@ args.exclude_mrns = exclude_mrns
 model, parameters = generate_model(args)
 summary(model, (args.in_modality, args.input_D, args.input_H, args.input_W))
 
-model_to_load = '20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV'
+model_to_load = '20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV'
 
 checkpoint_path_main = '/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/trails/' + \
                        model_to_load
 
 saved_end_model_120 = [
-    'resnet_101_epoch_89_20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV_fold_1.pth.tar',
-    'resnet_101_epoch_98_20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV_fold_2.pth.tar',
-    'resnet_101_epoch_84_20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV_fold_3.pth.tar',
-    'resnet_101_epoch_98_20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV_fold_4.pth.tar',
-    'resnet_101_epoch_90_20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV_fold_5.pth.tar']
+    'resnet_101_epoch_143_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_1.pth.tar',
+    'resnet_101_epoch_179_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_2.pth.tar',
+    'resnet_101_epoch_191_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_3.pth.tar'
+]
 
 print('saved model: ', saved_end_model_120)
 

@@ -220,7 +220,7 @@ class Trainer:
                 self.lr_scheduler.step()
 
         # Saving training values (train and val to graph)
-        train_val_values_store_dir = '/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/train_loss_eval/'
+        train_val_values_store_dir = './Data/train_loss_eval/'
 
         train_val_values_model_dir = os.path.join(train_val_values_store_dir, self.args.short_note)
         if not os.path.exists(train_val_values_model_dir):
@@ -345,7 +345,7 @@ class Trainer:
         def select_values_for_cal(value, ind_):
             return value[ind_]
 
-        store_all_label_pred_dir = r'/home/s185479/Python/Working_Projects/Lung_Cancer_Classification/Data/saved_predictions/evidential_dl'
+        store_all_label_pred_dir = r'./Data/saved_predictions/evidential_dl'
 
         if not os.path.exists(store_all_label_pred_dir):
             os.makedirs(store_all_label_pred_dir)

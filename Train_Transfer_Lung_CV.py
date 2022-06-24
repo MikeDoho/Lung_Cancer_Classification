@@ -69,12 +69,12 @@ def main():
     # log = logging.getLogger()
 
 
-    if float(args.resnet_lr_factor) > 0 and args.batch_size > 16:
-        print('\ndownsizing batch size because now we are training the whole model\n')
-        args.batch_size = 16
-        print(args.batch_size)
-    else:
-        pass
+    # if float(args.resnet_lr_factor) > 0 and args.batch_size > 16:
+    #     print('\ndownsizing batch size because now we are training the whole model\n')
+    #     args.batch_size = 16
+    #     print(args.batch_size)
+    # else:
+    #     pass
 
     print(f"Setting seed for reproducibility\n\tseed: {args.manual_seed}")
     utils.general.reproducibility(args, args.manual_seed)

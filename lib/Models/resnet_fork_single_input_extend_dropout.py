@@ -72,7 +72,7 @@ class BasicBlock(nn.Module):
 class Bottleneck(nn.Module):
     expansion = 4
 
-    def __init__(self, inplanes, planes, stride=1, dilation=1, downsample=None):
+    def __init__(self, inplanes, planes, stride=1, dilation=1, downsample=None, dropout_rate=0.05):
         super(Bottleneck, self).__init__()
         self.conv1 = nn.Conv3d(inplanes, planes, kernel_size=1, bias=False)
         self.bn1 = nn.BatchNorm3d(planes)
@@ -85,19 +85,23 @@ class Bottleneck(nn.Module):
         self.downsample = downsample
         self.stride = stride
         self.dilation = dilation
+        self.dropout3d_bottleneck = nn.Dropout3d(p=dropout_rate)
 
     def forward(self, x):
         residual = x
 
         out = self.conv1(x)
+        out = self.dropout3d_bottleneck(out)  # added dropout
         out = self.bn1(out)
         out = self.relu(out)
 
         out = self.conv2(out)
+        out = self.dropout3d_bottleneck(out)  # added dropout
         out = self.bn2(out)
         out = self.relu(out)
 
         out = self.conv3(out)
+        out = self.dropout3d_bottleneck(out)  # added dropout
         out = self.bn3(out)
 
         if self.downsample is not None:
@@ -157,7 +161,7 @@ class ResNet(nn.Module):
                 padding=(1, 1, 1),
             ),
 
-            nn.Dropout3d(p=0.05),
+            # nn.Dropout3d(p=0.05),
             nn.BatchNorm3d(512),
             nn.ReLU(inplace=True),
 
@@ -169,7 +173,7 @@ class ResNet(nn.Module):
                 padding=(1, 1, 1),
                 bias=False),
 
-            nn.Dropout3d(p=0.05),
+            # nn.Dropout3d(p=0.05),
             nn.BatchNorm3d(256),
             nn.ReLU(inplace=True),
 
@@ -181,7 +185,7 @@ class ResNet(nn.Module):
                 padding=(1, 1, 1),
             ),
 
-            nn.Dropout3d(p=0.05),
+            # nn.Dropout3d(p=0.05),
             nn.BatchNorm3d(128),
             nn.ReLU(inplace=True),
             nn.Conv3d(
@@ -192,7 +196,7 @@ class ResNet(nn.Module):
                 padding=(1, 1, 1),
                 bias=False),
 
-            nn.Dropout3d(p=0.05),
+            # nn.Dropout3d(p=0.05),
             nn.BatchNorm3d(128),
             nn.ReLU(inplace=True),
 
@@ -220,7 +224,7 @@ class ResNet(nn.Module):
                     stride=stride,
                     no_cuda=self.no_cuda)
             else:
-                dropout_downsample = nn.Dropout3d(p=0.05)
+                dropout_downsample = nn.Dropout3d(p=0.20)
                 downsample = nn.Sequential(
                     nn.Conv3d(
                         self.inplanes,

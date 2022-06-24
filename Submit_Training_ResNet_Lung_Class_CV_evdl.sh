@@ -1,8 +1,7 @@
 #!/bin/bash
 
-
-python Train_Transfer_Lung_CV_evdl.py >> Logs/20220614_res101ext-sm-do005-evdl_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[150]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV.log \
---gpu_id 0 \
+python Train_Transfer_Lung_CV_evdl.py >> Logs/20220621_res101ext-do_ds020bn005-evdl_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[150]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[none]_im[ct]_cv[5].log \
+--gpu_id 1 \
 --is_transfer True \
 --is_classi True \
 --in_modality 1 \
@@ -30,7 +29,7 @@ python Train_Transfer_Lung_CV_evdl.py >> Logs/20220614_res101ext-sm-do005-evdl_l
 --min_max_key_path "na" \
 --fraction_key_path "na" \
 \
---weighted_sampler_on True \
+--weighted_sampler_on False \
 --weighted_sampler_weight_adjust '[1.0, 1.0]' \
 \
 --clinical_model_on 'false' \
@@ -41,7 +40,7 @@ python Train_Transfer_Lung_CV_evdl.py >> Logs/20220614_res101ext-sm-do005-evdl_l
 \
 --use_tb 'false' \
 \
---short_note "20220614_res101ext-sm-do005-evdl_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[150]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV" \
+--short_note "20220621_101ext-do_ds020bn005-evdl_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_e[150]_s[200]_cv[5]" \
 --exclude_mrn 'false' \
 --exclude_mrn_filename 'na.csv' \
 --exclude_mrn_path './na/' \

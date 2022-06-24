@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python Trained_lung_model_uncertainty.py >> Logs/20220614_trained-evdl_models_uncertainty_DO-000-005_100-005_do200_tta200-2.log \
+python Trained_lung_model_uncertainty.py >> Logs/20220615_trained_model_cv3_uncertainty_DO-000-005_100-010_do300_tta300-3.log \
 --gpu_id 1 \
 --is_transfer True \
 --is_classi True \
@@ -40,7 +40,7 @@ python Trained_lung_model_uncertainty.py >> Logs/20220614_trained-evdl_models_un
 \
 --use_tb 'false' \
 \
---short_note "20220614_trained-evdl_res101_DO-000-005_100-005_do200_tta200-2" \
+--short_note "20220615_trained_cv3_res101_DO-000-005_100-010_do300_tta300-3" \
 --exclude_mrn 'false' \
 --exclude_mrn_filename 'na.csv' \
 --exclude_mrn_path './na/' \
@@ -49,7 +49,7 @@ python Trained_lung_model_uncertainty.py >> Logs/20220614_trained-evdl_models_un
 --learning_rate 0.01 \
 \
 --class_weights "[1.0, 1.0]" \
---cv_num 5 \
+--cv_num 3 \
 --augmentation 'true' \
 --do_normalization 'true' \
 --aug_percent 0.70 \
@@ -57,9 +57,9 @@ python Trained_lung_model_uncertainty.py >> Logs/20220614_trained-evdl_models_un
 --reset_bottleneck_dropout_percent 0.0 \
 --mc_bottleneck_dropout_rate 0.05 \
 --reset_downsample_dropout_percent 1 \
---mc_downsample_dropout_rate 0.05 \
+--mc_downsample_dropout_rate 0.10 \
 --mc_do 'true' \
 --do_tta 'true' \
---mc_do_num 200 \
---tta_num 200 \
---increase_tta_factor 2 \
+--mc_do_num 300 \
+--tta_num 300 \
+--increase_tta_factor 3 \

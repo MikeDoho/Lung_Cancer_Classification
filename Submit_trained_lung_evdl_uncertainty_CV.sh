@@ -1,11 +1,11 @@
 #!/bin/bash
 
-python Trained_lung_evdl_model_uncertainty.py >> Logs/20220615_trained-evdl_models_uncertainty_DO-000-005_100-005_do200_tta200-2_cv3.log \
---gpu_id 0 \
+python Trained_lung_evdl_model_uncertainty.py >> Logs/20220622_trained-evdl_bs20bn5_DO-100-005_100-020_do200_tta200-3_cv5.log \
+--gpu_id 1 \
 --is_transfer True \
 --is_classi True \
 --in_modality 1 \
---n_epochs 100 \
+--n_epochs 150 \
 --manual_seed 200 \
 --batch_size 30 \
 --input_H 32 \
@@ -29,7 +29,7 @@ python Trained_lung_evdl_model_uncertainty.py >> Logs/20220615_trained-evdl_mode
 --min_max_key_path "na" \
 --fraction_key_path "na" \
 \
---weighted_sampler_on True \
+--weighted_sampler_on False \
 --weighted_sampler_weight_adjust '[1.0, 1.0]' \
 \
 --clinical_model_on 'false' \
@@ -40,7 +40,7 @@ python Trained_lung_evdl_model_uncertainty.py >> Logs/20220615_trained-evdl_mode
 \
 --use_tb 'false' \
 \
---short_note "20220615_trained-evdl_res101_DO-000-005_100-005_do200_tta200-2_cv3" \
+--short_note "20220622_trained-evdl_res101_bs20bn5_DO-100-005_100-020_do200_tta200-3_cv5" \
 --exclude_mrn 'false' \
 --exclude_mrn_filename 'na.csv' \
 --exclude_mrn_path './na/' \
@@ -49,17 +49,17 @@ python Trained_lung_evdl_model_uncertainty.py >> Logs/20220615_trained-evdl_mode
 --learning_rate 0.01 \
 \
 --class_weights "[1.0, 1.0]" \
---cv_num 3 \
+--cv_num 5 \
 --augmentation 'true' \
 --do_normalization 'true' \
 --aug_percent 0.70 \
 \
---reset_bottleneck_dropout_percent 0.0 \
+--reset_bottleneck_dropout_percent 1 \
 --mc_bottleneck_dropout_rate 0.05 \
 --reset_downsample_dropout_percent 1 \
---mc_downsample_dropout_rate 0.05 \
+--mc_downsample_dropout_rate 0.20 \
 --mc_do 'true' \
 --do_tta 'true' \
---mc_do_num 200 \
---tta_num 200 \
---increase_tta_factor 2 \
+--mc_do_num 300 \
+--tta_num 300 \
+--increase_tta_factor 3 \

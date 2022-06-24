@@ -104,11 +104,18 @@ checkpoint_path_main = '/home/s185479/Python/Working_Projects/Lung_Cancer_Classi
 #     'resnet_101_epoch_98_20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV_fold_4.pth.tar',
 #     'resnet_101_epoch_90_20220610_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.9]_ep[100]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[5]_CV_fold_5.pth.tar']
 
+# saved_end_model_120 = [
+#     'resnet_101_epoch_143_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_1.pth.tar',
+#     'resnet_101_epoch_179_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_2.pth.tar',
+#     'resnet_101_epoch_191_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_3.pth.tar'
+#     ]
+
 saved_end_model_120 = [
-    'resnet_101_epoch_143_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_1.pth.tar',
-    'resnet_101_epoch_179_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_2.pth.tar',
-    'resnet_101_epoch_191_20220614_res101ext-sm-do005_lTL[1e-2]_lr[wcos30_1e-2]_a[0.7]_ep[200]_cw[1.0,1.0]_sw[1.0,1.0]_s[200]_c[na]_[wsamp]_im[ct]_cv[3]_CV_fold_3.pth.tar'
-    ]
+    'resnet_101_epoch_200_batch_0_fold_1.pth.tar',
+    'resnet_101_epoch_200_batch_0_fold_2.pth.tar',
+    'resnet_101_epoch_200_batch_0_fold_3.pth.tar'
+
+]
 
 print('saved model: ', saved_end_model_120)
 
@@ -200,9 +207,9 @@ for j, saved_model_name in enumerate(saved_end_model_120):
         for name, child in model_do_copy.named_children():
             print(name, child)
 
-        # print('\nNamed modules')
-        # for idx, m in enumerate(model_do_copy.named_modules()):
-        #     print(idx, '->', m)
+        print('\nNamed modules')
+        for idx, m in enumerate(model_do_copy.named_modules()):
+            print(idx, '->', m)
 
     # LOADING DATA (MRN, LABEL) TO LATER PERFORM DATA SPLIT FOR CROSS-VALIDATION
     # train_label path, val_label_path, and test_label_path are all the same
@@ -451,7 +458,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
         # Saving validation Epistemic uncertainty calculations
 
         filename_val_epistemic_entropy = f"image_model_val_epistemic_do_entropy_" \
-                                         f"resnet_lung_bestof_fold_{j + 1}_bottleneck_{args.reset_bottleneck_dropout_percent}_" \
+                                         f"{saved_model_name}_bottleneck_{args.reset_bottleneck_dropout_percent}_" \
                                          f"{args.mc_bottleneck_dropout_rate}_downsample_{args.reset_downsample_dropout_percent}_" \
                                          f"{args.mc_downsample_dropout_rate}_num{args.mc_do_num}_rundate_{args.time_stamp}.csv"
         val_epistemic_entropy_csv_dir = os.path.join(epistemic_uncertainty_store_dir,
@@ -460,7 +467,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
 
         # Saving test Epistemic uncertainty calculations
         filename_test_epistemic_entropy = f"image_model_test_epistemic_do_entropy_" \
-                                          f"resnet_lung_bestof_fold_{j + 1}_bottleneck_{args.reset_bottleneck_dropout_percent}_" \
+                                          f"{saved_model_name}_bottleneck_{args.reset_bottleneck_dropout_percent}_" \
                                           f"{args.mc_bottleneck_dropout_rate}_downsample_{args.reset_downsample_dropout_percent}_" \
                                           f"{args.mc_downsample_dropout_rate}_num{args.mc_do_num}_rundate_{args.time_stamp}.csv"
         test_epistemic_entropy_csv_dir = os.path.join(epistemic_uncertainty_store_dir,
@@ -492,7 +499,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
 
         # Saving validation aleatoric uncertainty calculations
         filename_val_aleatoric_entropy = f"image_model_val_aleatoric_tta_entropy_" \
-                                         f"resnet_lung_bestof_fold_{j + 1}_num{args.tta_num}_" \
+                                         f"{saved_model_name}_num{args.tta_num}_" \
                                          f"ttafactor_{args.increase_tta_factor}_rundate_{args.time_stamp}.csv"
         val_aleatoric_entropy_csv_dir = os.path.join(aleatoric_uncertainty_store_dir,
                                                      filename_val_aleatoric_entropy)
@@ -500,7 +507,7 @@ for j, saved_model_name in enumerate(saved_end_model_120):
 
         # Saving test aleatoric uncertainty calculations
         filename_test_aleatoric_entropy = f"image_model_test_aleatoric_tta_entropy_" \
-                                          f"resnet_lung_bestof_fold_{j + 1}_num{args.tta_num}_" \
+                                          f"{saved_model_name}_num{args.tta_num}_" \
                                           f"ttafactor_{args.increase_tta_factor}_rundate_{args.time_stamp}.csv"
         test_aleatoric_entropy_csv_dir = os.path.join(aleatoric_uncertainty_store_dir,
                                                       filename_test_aleatoric_entropy)
